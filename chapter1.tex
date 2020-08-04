@@ -1,0 +1,29 @@
+\section{Erste Begriffe}
+
+\begin{karte}{Stochastischer Prozess}
+    Eine Folge von Zufallsvariablen \((X_n)_n\) auf 
+    \((\Omega, \mathcal{F}, \Pbb)\) mit 
+    \( \abb{X_n}{\Omega}{S} \) heißt \textit{stochastischer Prozess} 
+    (in diskreter Zeit) mit Zustandsraum \(S\).
+\end{karte}
+
+\begin{karte}{Stochastische Matrix}
+    Eine Matrix \(P = (p_{ij})\) heißt \textit{stochastische Matrix}, 
+    falls \(p_{ij} \geq 0\) ist und \( \forall i \in S \) gilt 
+    \( \sum_{j\in S} p_{ij} = 1 \).
+\end{karte}
+
+\begin{karte}{Markov-Kette}
+    Sei \(P\) eine stochastische Matrix. 
+    Eine Folge \(X_0, \ldots\) von \(S\)-wertigen 
+    Zufallsvariablen heißt (homogene) \textit{Markov-Kette} 
+    mit Übergangsmatrix \(P\), falls für alle \(n\in\N\) 
+    und Zustände \(i_k\in S\) mit \( \Pbb(X_0 = i_0, \ldots, X_n = i_n) > 0 \) 
+    gilt 
+    \[ \Pbb(X_{n+1} = i_{n+1} \;|\; X_0 = i_0, \ldots, X_n = i_n) 
+    = \Pbb(X_{n+1} = i_{n+1} \;|\; X_n = i_n) = p_{i_n i_{n+1}}. \]
+
+    Die \(p_{ij}\) heißen Übergangswahrscheinlichkeiten und die 
+    Startverteilung \(\nu\) ist definiert durch \(\nu(i) = \Pbb(X_0 = i)\) 
+    für \(i\in S\).
+\end{karte}
