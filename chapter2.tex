@@ -1,0 +1,170 @@
+\section{Zustände, Rekurrenz, Transienz}
+
+\subsection*{Klassifikation}
+
+\begin{karte}{Kommunizierend}
+    Sei \((X_n)\) eine Markov-Kette mit Übergangsmatrix \(P = (p_{ij})\). 
+    \begin{enumerate}
+        \item Ein Zustand \(i\in S\) führt nach \(j\in S\) (kurz \(i \leadsto j\)), falls es ein \(n\in\N\) gibt mit \(p_{ij}^{(n)} > 0\).
+        \item Ein Zustand \(i\in S\) kommuniziert mit \(j\in S\) (kurz \(i \leftrightarrow j\)), falls sowohl \(i \leadsto j\) als auch \(j \leadsto i\) gilt.
+    \end{enumerate}
+
+    Für \(i,j \in S\) sei \(i \sim j :\Leftrightarrow (i\leftrightarrow j) \vee (i = j)\). \\
+    \(\sim \) ist eine Äquivalenzrelation auf \(S\).\\
+    Die Äquivalenzklasse \(K(i) := \set{j\in S \;|\; i \sim j}\) enthält \(i\) und alle 
+    mit \(i\) kommunizierenden Zustände.
+\end{karte}
+
+\begin{karte}{Abgeschlossenheit, Irreduzibilität}
+    Sei \((X_n)\) eine Markov-Kette mit Übergangsmatrix \(P = (p_{ij})\).
+    \begin{enumerate}
+        \item \(J\subset S\) heißt \textit{abgeschlossen}, wenn es keine zwei Zustände 
+        \(j\in J, i \in S \setminus J\) gibt mit \(j\leadsto i\).
+        \item Die Markov-Kette \((X_n)\) bzw. die Übergangsmatrix \(P\) 
+        heißen \textit{irreduzibel}, falls \(S\) nur aus einer Klasse besteht, 
+        also für alle \(i,j\in S, i\neq j\), gilt \(i \leftrightarrow j\).
+    \end{enumerate}
+
+    \(J\subset S\) ist genau dann abgeschlossen, wenn \(p_{ij}, i,j\in J\) 
+    stochastisch ist.
+\end{karte}
+
+\begin{karte}{Eintrittszeit}
+    Sei 
+    \[ T_i := \inf \set{n\in \N: X_n = i} \]
+    die Ersteintrittszeit der Markov-Kette in den Zustand \(i\). \\
+    Wir setzen dabei \(\inf \emptyset := \infty\).
+\end{karte}
+
+\begin{karte}{Eintrittswahrscheinlichkeiten}
+    Sei für \(i,j\in S, n\in\N\): 
+    \begin{align*}
+        f_{ij}^{(n)} &:= \P(T_j = n \;|\; X_0 = i) = \P_i(T_j = n) \\
+        &= \P(X_n = j, X_\nu \neq j \text{ für } 1 \leq \nu < n \;|\; X_0 = i) \\
+        f_{ij}^{(0)} &:= 0.
+    \end{align*}
+    Offenbar ist \(f_{ij}^{(1)} = p_{ij}\).
+
+    Wir definieren die Eintrittswahrscheinlichkeiten 
+    \begin{align*}
+        f_{ij}^* &:= \sum_{n=0}^\infty f_{ij}^{(n)} \\
+        &= \sum_{n=0}^\infty \P_i(T_j = n) = \P_i(T_j < \infty) \\
+        &= \P_i(\exists n\in \N: X_n = j) \in [0,1].
+    \end{align*}
+\end{karte}
+
+\begin{karte}{Rekkurent, transient}
+    Ein Zustand \(i\in S\) heißt \textit{rekurrent}, falls 
+    \(f_{ii}^* = 1\) und \textit{transient} sonst.
+
+    Ein Zustand \(i\in S\) ist rekurrent genau dann, wenn gilt 
+    \[ \sum_{n=0}^\infty p_{ii}^{(n)} = \infty. \]
+\end{karte}
+
+\begin{karte}{Eintrittswahrscheinlichkeiten Gleichung}
+    Für alle \(n\in \N, i,j\in S\) gilt: 
+    \[ p_{ij}^{(n)} = \sum_{k=1}^n f_{ij}^{(k)} p_{jj}^{(n-k)}. \]
+\end{karte}
+
+\begin{karte}{Solidaritätsprinzip}
+    Ist ein Zustand \(i\in S\) rekurrent (bzw. transient), so ist 
+    jeder Zustand in \(K(i)\) rekurrent (bzw. transient).
+
+    Ist \(i \in S\) rekkurent (bzw. transient), so sagen wir 
+    \(K(i)\) ist rekurrent (bzw. transient). 
+    Ist \((X_n)\) irreduzibel und ein \(i \in S\) rekkurent (bzw. transient), 
+    so sagen wir \((X_n)\) ist rekurrent (bzw. transient).
+
+    Liegen \(i\) und \(j\) in derselben rekurrenten Klasse, 
+    so gilt \( f_{ij}^* = f_{ji}^* = 1 \).
+\end{karte}
+
+\begin{karte}{Transienzkriterium}
+    Für alle \(i,j \in S\) gilt: Wenn \(j\) transient ist, dann gilt 
+    \[ \sum_{n=0}^\infty p_{ij}^{(n)} < \infty. \]
+    Insbesondere ist \(\limes{n} p_{ij}^{(n)} = 0\).
+\end{karte}
+
+\begin{karte}{Eigenschaften Rekurrenzklassen}
+    Ist eine Klasse \(K\subseteq S\) rekkurent, so ist \(K\) 
+    abgeschlossen bzw. die Matrix \((p_{ij}, i,j\in K)\) ist stochastisch.
+\end{karte}
+
+\begin{karte}{Endliche Äquivalenzklassen}
+    Ist die Klasse \(K\) endlich und abgeschlossen, so ist \(K\) rekurrent.
+
+    Insbesondere gilt: Ist \(S\) endlich und \(P\) irreduzibel, so ist 
+    die Markov-Kette rekurrent.
+\end{karte}
+
+\subsection*{Absorptionswahrscheinlichkeiten}
+
+\begin{karte}{Austrittszeit}
+    Zerlegen wir \(S\) in rekurrente Klassen \(K_1, \ldots, K_m\)
+    und eine Menge von transienten Zuständen \(T\).
+
+    Es sei \(\tau := \inf \set{n\geq 0 \;|\; X_n \notin T}\) die 
+    Austrittszeit aus der Menge der transienten Zustände.
+
+    Für \(i\in T, k \in T^C\) interessiert uns 
+    \[ u_{ik} := \P_i(X_\tau = k). \]
+\end{karte}
+
+\begin{karte}{Austrittszeitwahrscheinlichkeit}
+    Für \(i\in T, j \in T^C\) gilt:
+    \[ u_{ij} = \sum_{k\in T} p_{ik} u_{kj} + p_{ij}. \]
+\end{karte}
+
+\begin{karte}{Fundamentalmatrix}
+    Unterteilen wir \(P = (p_{ij})\) in 
+    \[ P = \begin{pmatrix}
+        Q & R \\ 0 & \tilde{P}
+    \end{pmatrix}, \]
+    wobei \(Q = (q_{ij}) = (p_{ij}, i,j\in T)\) und ist 
+    \(U = (u_{ij})_{i\in T, j\in T^C}\),
+    dann gilt \( U = (E - Q)^{-1} R \).
+
+    Die sogenannte \textit{Fundamentalmatrix} \((E-Q)^{-1}\) 
+    existiert.
+\end{karte}
+
+\subsection*{Absorptionsdauern}
+
+\begin{karte}{Mittlere Absorptionsdauer}
+    Sei \(\abb{g}{S}{\R}\). Wir definieren 
+    \[ w_i := \E_i \left[ \sum_{n=0}^{\tau - 1} g(X_n) \right] \]
+
+    Für \(i\in T, j\in T^C\) gilt: 
+    \[ w_i = g(i) + \sum_{j\in T} p_{ij} w_j. \]
+
+    Für \(g \equiv 1\) ergibt sich \(w_i = \E_i \tau\).
+    
+    Für \(g(i) = \delta_{ij}, j\in T\) ergibt sich \(w_i = \E_i \left[\sum_{n=0}^\infty 1_{\set{X_n = j}}\right]\).
+
+    \(w\) lässt sich schreiben als 
+    \[ w = (E - Q)^{-1} g. \]
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}

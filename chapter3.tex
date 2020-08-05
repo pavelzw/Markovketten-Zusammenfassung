@@ -1,0 +1,108 @@
+\section{Stationäre Verteilungen}
+
+\begin{karte}{Maß}
+    Eine Abbildung \( \abb{\nu}{S}{\R_{\geq 0}} \) nennen wir \textit{Naß}.
+    Falls \( \sum_{i\in S} \nu(i) = 1 \), so nennen wir \(\nu\) eine Verteilung.
+\end{karte}
+
+\begin{karte}{Invariantes Maß, stationäre Verteilung}
+    Sei \((X_n)\) eine Markov-Kette mit Übergangsmatrix \(P = (p_{ij})\). 
+    Ein Maß \(\nu\) heißt \textit{invariant} für \(P\), falls 
+    \(\nu \cdot P = \nu\), d. h. falls gilt: 
+    \[ \sum_{i\in S} \nu(i) p_{ij} = \nu(j). \]
+    Ist \(\nu\) eine Verteilung und invariant, so nennt man \(\nu\) 
+    auch \textit{stationäre Verteilung} oder 
+    \textit{Gleichgewichtsverteilung}.
+
+    Ist \(S\) endlich, so kann jedes nichtnull invariante Maß normiert werden.
+
+    Da \(\nu P^n = \nu\), gilt \(\P_\nu(X_n = j) = \nu(j)\).
+\end{karte}
+
+\begin{karte}{Detailed balance equations}
+    Gelten die sogenannten \textit{detailed balance equations}, 
+    d. h. gibt es eine Verteilung \(\pi\) auf \(S\) mit 
+    \[ \pi(i) p_{ij} ) \pi(j) p_{ji}, \]
+    dann ist \(\pi\) eine stationäre Verteilung.
+\end{karte}
+
+\begin{karte}{Eindeutigkeit invariantes Maß}
+    Wir definieren für ein \(k\in S\) das Maß \(\gamma_k\) durch:
+    \[ \gamma_k(i) := \E_k \left[ \sum_{n=1}^{T_k} 1_{[x_n = i]} \right], i \in S. \] 
+
+    Sei \((X_n)\) irreduzibel und rekurrent, \(k\in S\). Dann gilt 
+    \begin{enumerate}
+        \item \(\gamma_k\) ist ein invariantes Maß,
+        \item \(0 < \gamma_k < \infty\),
+        \item \(\gamma_k\) ist das einzige Maß mit \(\gamma_k(k) = 1\) (eindeutig bis auf Vielfache).
+    \end{enumerate}
+    Ist \(S\) endlich und \(P\) irreduzibel, so existiert eine eindeutige Stationäre Verteilung.
+
+    Ist \((X_n)\) irreduzibel und transient, so kann keine stationäre Verteilung existieren.
+\end{karte}
+
+\begin{karte}{Mittlere Rückkehrzeit}
+    Für \(i\in S\) sei 
+    \begin{align*}
+        m_i &:= \E_i[T_i] = \sum_{n=1}^\infty n \cdot \P_i(T_i = n) + \infty \cdot (1-f_{ii}^*) \\
+        &= \sum_{n=1}^\infty n \cdot f_{ii}^{(n)} + \infty (1-f_{ii}^*)
+    \end{align*}
+    die \textit{mittlere Rückkehrzeit} des Zustands \(i\).
+\end{karte}
+
+\begin{karte}{Positiv rekurrent, nullrekurrent}
+    Ein Zustand \(i\in S\) heißt \textit{positiv rekurrent}, 
+    falls \(m_i < \infty\), und \textit{nullrekurrent}, falls 
+    \(i\) rekurrent und \(m_i = \infty\) ist.
+
+    \begin{enumerate}
+        \item Ist \(i\) positiv rekurrent, so ist \(\frac{1}{m_i}\) positiv, 
+        ist \(i\) nullrekurrent, so ist \(\frac{1}{m_i} = 0\).
+        \item Ist \(j\) transient, so folgt \(m_j = \infty\).
+        \item Jeder positiv rekurrente Zustand ist auch rekurrent.
+    \end{enumerate}
+\end{karte}
+
+\begin{karte}{Kriterium positive Rekurrenz}
+    Sei \((X_n)\) eine irreduzible Markov-Kette. \\
+    Die folgenden Aussagen sind äquivalent:
+    \begin{enumerate}
+        \item Es existiert eine stationäre Verteilung.
+        \item Es gibt einen positiv rekurrenten Zustand \(i\in S\).
+        \item Alle Zustände in \(S\) sind positiv rekurrent.
+    \end{enumerate}
+
+    Sind diese Bedingungen erfüllt, so ist die stationäre Verteilung eindeutig durch 
+    \[ \pi(i) = \frac{1}{m_i}, i\in S \] 
+    gegeben.
+\end{karte}
+
+\begin{karte}{Trichotomie für irreduzible Markov-Ketten}
+    Eine irreduzible Markov-Kette gehört zu genau einem der folgenden Fälle:
+    \begin{enumerate}
+        \item Die Markov-Kette ist \textit{transient}, es gibt keine stationäre Verteilung.
+        \item Die Markov-Kette ist \textit{nullrekurrent}. Für alle \(i,j\in S\) gilt:
+        \[ \P_i(T_j < \infty) = 1 \text{ und } \E_i[T_j] = \infty \]
+        und es gibt ein (bis auf Vielfache) eindeutiges invariantes Maß, aber keine stationäre Verteilung.
+        \item Die Markov-Kette ist \textit{positiv rekurrent}. Für alle \(i,j\in S\) 
+        ist \(\E_i[T_j] < \infty\) und es gibt eine stationäre Verteilung.
+    \end{enumerate}
+
+    Ist \(S\) endlich und die Markov-Kette irreduzibel, so ist sie automatisch positiv rekurrent.
+
+    Ist \(\pi\) eine stationäre Verteilung, 
+    so ist \(\pi(i)\) der durchschnittliche Bruchteil der Zeit, 
+    den die Markov-Kette im Zustand \(i\) verbringt.
+\end{karte}
+
+\begin{karte}{Kriterium Transienz}
+    Sei \((X_n)\) eine Markov-Kette auf \(S\). 
+    Nehme einen beliebigen Zustand \(i_0 \in S\) und setze
+    \(Q = (p_{ij}, i,j\in S \setminus\set{i_0})\).
+    Die folgenden Aussagen sind äquivalent:
+    \begin{enumerate}
+        \item Die Markov-Kette ist transient.
+        \item \(Qx = x, 0 \leq x_i \leq 1, i \in S\setminus\set{i_0}\) 
+        besitzt eine Lösung \(\neq 0\).
+    \end{enumerate}
+\end{karte}
