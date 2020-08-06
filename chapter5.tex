@@ -1,0 +1,51 @@
+\section{Reversibilität und MCMC}
+
+\subsection*{Reversibilität}
+
+\begin{karte}{\(Q\)}
+    Definiere die Matrix stochastische \(Q = (q_{ij})\) durch 
+    \[ q_{ij} := \frac{\pi(j)}{\pi(i)} p_{ij}. \]
+    Sei \((X_n)\) eine irreduzible Markov-Kette mit stationärer Verteilung \(\pi\).
+    \((\hat{X}_n)\) sei eine Markov-Kette mit Übergangsmatrix \(Q\).
+    Dann ist \((\hat{X}_n)\) irreduzibel und hat auch stationäre Verteilung \(\pi\).
+    Außerdem gilt
+    \[ \P_\pi(X_0 = i_0,\ldots, X_n = i_n) = \P_\pi (\hat{X}_0 = i_n, \ldots, \hat{X}_n = i_n). \]
+\end{karte}
+
+\begin{karte}{Reversibilität}
+    Eine Markov-Kette mit positiver stationärer Verteilung \(\pi\) 
+    heißt \textit{reversibel}, falls 
+    \[ \pi(i) p_{ij} = \pi(j) p_{ji} \text{ für alle } i,j\in S. \]
+    In diesem Fall ist \(P=Q\) und die Zeitumkehr verhält sich statistisch wie \((X_n)\) selbst.
+\end{karte}
+
+\begin{karte}{Detailed balance equations}
+    Sei \(P\) eine stochastische Matrix auf \(S\) und \(\pi\) eine Verteilung auf \(S\). 
+    Wenn die detailed balance equations gelten, d. h. wenn 
+    \[ \pi(i) p_{ij} = \pi(j) p_{ji} \text{ für alle } i,j\in S, \]
+    dann ist \(\pi\) eine stationäre Verteilung.
+\end{karte}
+
+\subsection*{Markov Chain Monte Carlo}
+
+\begin{karte}{Metropolis-Kette}
+    Wählen wir die Übergangsmatrix \(P=(p_{ij})\) mit 
+    \[ p_{ij} = \begin{cases}
+        \psi_{ij} \left( \frac{\pi(j)}{\pi)i} \wedge 1 \right), & j\neq i, \\
+        1 - \sum_{k\neq i} \psi_{ik} \left( \frac{\pi(j)}{\pi(i)} \wedge 1 \right), & j = i,
+    \end{cases} \]
+    so besitzt die Markov-Kette die stationäre Verteilung \(\pi\). Dies ist die sogenannte 
+    \textit{Metropolis-Kette}.
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}
+
+\begin{karte}{}
+
+\end{karte}

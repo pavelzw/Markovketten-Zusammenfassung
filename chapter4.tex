@@ -1,0 +1,89 @@
+\section{Konvergenz stat. Verteilung}
+
+\begin{karte}{Totalvariationsabstand}
+    Seien \(\mu\) und \(\nu\) zwei Wahrscheinlichkeitsmaße auf \((S, \mathcal{P}(S))\).
+    Der \textit{Totalvariationsabstand} \(d(\mu,\nu)\) zwischen \(\mu\) und \(\nu\) ist 
+    \[ d(\mu,\nu) := \sup_{A\subset S} \abs{\mu(A) - \nu(A)}. \]
+
+    Es gilt 
+    \[ d(\mu,\nu) = \frac{1}{2} \sum_{i\in S} \abs{\mu(i) - \nu(i)}. \]
+    Es folgt offensichtlich \(d(\mu,\nu) \leq 1\).
+
+    Außerdem folgt 
+    \[ \sum_{\substack{i\in S\\\mu(i)>\nu(i)}} (\mu(i) - \nu(i)) = d(\mu,\nu). \]
+\end{karte}
+
+\begin{karte}{Periode}
+    Sei \((X_n)\) eine Markov-Kette mit Übergangsmatrix \(P\). Die 
+    Periode \(d_i\) eines Zustandes ist gegeben durch 
+    \[ d_i = ggT\set{n\in \N: p_{ii}^{(n)} > 0}. \]
+    Ein Zustand \(i\) heißt \textit{aperiodisch}, wenn \(d_i = 1\).
+\end{karte}
+
+\begin{karte}{Eigenschaften periodische Markov-Kette}
+    \(P\) ist irreduzibel und aperiodisch \(\Leftrightarrow\)
+    für alle \(i,j\in S\) gibt es ein \(n_0\in \N\), sodass 
+    für alle \(n\geq n_0\) gilt: \(p_{ij}^{(n)} > 0\).
+\end{karte}
+
+\begin{karte}{Konvergenzsatz}
+    Sei \((X_n)\) eine irreduzible, aperiodisch und positiv rekurrente Markov-Kette mit Startverteilung \(\nu\) 
+    und stationärer Verteilung \(\pi\). Dann gilt 
+    \[ \limes{n} d(\nu P^n, \pi) = 0. \]
+
+    Sind \(\mu, \nu\) verschiedene Startverteilungen, so gilt 
+    \[ d(\nu P, \mu P) \leq d(\nu, \mu). \]
+    Insbesondere ist \(d(\nu P, \pi) \leq d(\nu,\pi)\), d. h. der Totalvariationsabstand 
+    von \(X_n\) zu \(\pi\) nimmt mit \(n\) ab.
+\end{karte}
+
+\begin{karte}{Mischungszeit}
+    Sei \((X_n)\) eine irreduzible, aperiodische und positiv rekurrente 
+    Markov-Kette mit stationärer Verteilung \(\pi\). Es sei 
+    \[ d(n) := \sup_{i\in S} d(\delta_i P^n, \pi). \]
+    Dann heißt \( t_{min}(\varepsilon) = \min \set{n\in \N: d(n)\leq \varepsilon} \) 
+    für \(\varepsilon > 0\) \textit{Mischungszeit}.
+\end{karte}
+
+\begin{karte}{Kopplung}
+    Seien \(\mu\) und \(\nu\) zwei Wahrscheinlichkeitsmaße auf \((S,\mathcal{P}(S))\). 
+    Ein Zufallsvektor \((X,Y)\) auf \((S^2, \mathcal{P}(S^2))\) heißt \textit{Kopplung} 
+    von \(\mu\) und \(\nu\), falls 
+    \[ \P(X=i) = \mu(i), \P(Y=j)=\nu(j) \text{ für alle } i,j\in S, \]
+    d. h. die Randverteilungen von \((X,Y)\) sind \(\mu\) bzw. \(\nu\).
+\end{karte}
+
+\begin{karte}{Totalvariationsabstand durch Kopplungen}
+    Seien \(\mu\) und \(\nu\) zwei Wahrscheinlichkeitsmaße auf \((S,\mathcal{P}(S))\). 
+    Dann gilt 
+    \[ d(\mu,\nu) = \inf \set{\P(X\neq Y) : (X,Y) \text{ ist eine Kopplung von } \mu,\nu} \]
+\end{karte}
+
+\begin{karte}{Kopplung von Markov-Ketten}
+    Eine Kopplung von Markov-Ketten \((X_n)\) und \((Y_n)\) mit Übergangsmatrix 
+    \(P\) ist ein Prozess \((X_n,Y_n)\), sodass die Randprozesse \((X_n)\) und \((Y_n)\)
+    Markov-Ketten mit Übergangsmatrix \(P\) sind und es gilt: 
+    \[ X_m = Y_m \Rightarrow X_n = Y_n \text{ für alle } n\geq m. \]
+\end{karte}
+
+\begin{karte}{Eigenschaften Kopplung} % todo
+    Sei \((X_n,Y_n)\) eine Kopplung von Markov-Ketten mit \(X_0 = i\), 
+    \(Y_0 = j\). Sei 
+    \[ \tau := \inf \set{n\in \N_0: X_n = Y_n}. \]
+    Dann gilt 
+    \[ d(\delta_i P^n, \delta_j P^n) \leq \P_{i,j}(\tau > n). \]
+\end{karte}
+
+\begin{karte}{\( \sup_{\sigma,\tau} \P(\tau > n) \)}
+    Sei \(T := \inf \set{n\in \N: X_n = X_n'}\). Dann gilt unabhängig von den Startpermutationen \(\sigma\) 
+    und \(\tau\)
+    \[ \sup_{\sigma,\tau} \P(\tau > n) \leq \frac{\E_{\sigma,\tau} T}{n} 
+    \leq \frac{\pi^2}{6} \frac{N^2}{n}. \]
+\end{karte}
+
+\begin{karte}{Konvergenzgeschwindigkeit}
+    Sei \((X_n)\) eine irreduzible und aperiodische Markov-Kette auf 
+    einem endlichen Zustandsraum \(S\) und \(\pi\) sei die stationäre Verteilung. 
+    Dann gibt es ein \(\alpha \in (0,1)\) und ein \(C>0\), sodass
+    \[ d(n) = \max_{i\in S} d(\delta_i P^n, \pi) \leq C \alpha^n \text{ für alle } n\in\N. \]
+\end{karte}
