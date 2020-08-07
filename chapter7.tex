@@ -1,0 +1,157 @@
+\section{Eigenschaften stetige Zeit}
+
+\begin{karte}{Stetige Markov-Kette}
+    \((X_t)_{t\geq 0}\) mit abzählbarem Zustandsraum \(S\) heißt (homogene) 
+    \textit{Markov-Kette}, falls \(\forall n\in\N\) und \(0\leq t_0<t_1<\cdots<t_n, t,h>0\) 
+    und \(\forall i_k \in S\) mit \( \P(X_{t_k} = i_k, 0 \leq k \leq n)>0 \) gilt 
+    \begin{align*}
+        \P(X_{t_n+h} = i_{n+1} \;|\; X_{t_k} = i_k, 0\leq k\leq n) &= \P(X_{t_n+h} = i_{n+1} \;|\; X_{t_n} = i_n) \\
+        &= \P(X_{t+h} = i_{n+1} \;|\; X_t = i_n).
+    \end{align*}
+\end{karte}
+
+\begin{karte}{Chapman-Kolmogorov-Gleichungen}
+    Sei \( p_{ij}(t) := \P(X_t = j \;|\; X_0 = i) \) und \(P(t) = (p_{ij}(t))\).
+    Dann gelten die \textit{Chapman-Kolmogorov-Gleichungen}
+    \[ p_{ij}(t+s) = \sum_{k\in S} p_{ik}(t) p_{kj}(s). \]
+    \(P\) heißt Übergangsmatrizenfunktion.
+\end{karte}
+
+\begin{karte}{Standardübergangsmatrizenfunktion}
+    Falls zusätzlich 
+    \[ \lim_{t\downarrow 0} p_{ij}(t) = \delta_{ij} \]
+    gilt, also \(P(t)\) rechtsseitig stetig in \(0\) ist, dann 
+    heißt \( \set{P(t), t\geq 0} \) \textit{Standardübergangsmatrizenfunktion}.
+
+    Dies impliziert, dass \(t\mapsto p_{ij}(t)\) stetig ist.
+\end{karte}
+
+\begin{karte}{\( \lim_{t\downarrow 0} \frac{f(t)}{t} \)}
+    Sei \( \abb{f}{(0,\infty)}{\R_+} \) mit \(\lim_{x\downarrow 0} f(x) = 0\) 
+    und \(f\) sei subadditiv, d. h. 
+    \[ f(x+y) \leq f(x) + f(y) \text{ für alle } x,y\in (0,\infty). \]
+    Definiere \(q:= \sup_{t> 0} \frac{f(t)}{t}\). Dann gilt 
+    \[ \lim_{t\downarrow 0} \frac{f(t)}{t} = q. \]
+\end{karte}
+
+\begin{karte}{Intensitätsmatrix}
+    Sei \( \set{P(t), t\geq 0} \) eine Standardübergangsmatrizenfunktion. 
+    Dann ist jedes \( p_{ij}(t) \) rechtsseitig differenzierbar, d. h. es 
+    existiert für alle \(i,j\in S\)
+    \[ q_{ij} := \lim_{t\downarrow 0} \frac{1}{t} (p_{ij}(t) - \delta_{ij}). \]
+
+    Die Matrix \(Q := (q_{ij})\) heißt \textit{Intensitätsmatrix} 
+    oder infinitesimaler Erzeuger (Generator) von \( \set{P(t), t\geq 0} \).
+\end{karte}
+
+\begin{karte}{Konservative SÜMF}
+    Sei \(\set{P(t), t\geq 0}\) eine SÜMF. Dann gilt für \(q_{ij} := p_{ij}'(0)\):
+    \begin{enumerate}
+        \item \( 0\leq q_{ij} < \infty, i\neq j, -\infty \leq q_{ii} \leq 0 \).
+        \item \( \sum_{j\neq i} \leq -q_{ii} =: q_i \). 
+        Falls \(S\) endlich ist, gilt \(q_i = \sum_{j\neq i} q_{ij}\) 
+        für \(i\in S\). In diesem Fall heißt die SÜMF \textit{konservativ}.
+    \end{enumerate}
+\end{karte}
+
+\begin{karte}{Kolmogorovsches Rückwartsdifferentialgleichungssystem}
+    Sei \( \set{P(t), t \geq 0} \) eine konservative SÜMF und \(q_i < \infty \) 
+    für \(i\in S\). Dann gilt das sogenannte Kolmogorovsche 
+    Rückwartsdifferentialgleichungssystem
+    \[ P'(t) = Q P(t), \]
+    d. h. für alle \(i,j\in S\) ist 
+    \[ p_{ij}'(t) = -q_i p_{ij}(t) + \sum_{k\neq i} q_{ik} p_{kj}(t). \]
+
+    Falls \(S\) endlich ist, ist die Lösung von \(P'(t) = Q P(t), P(0) = E\) gegeben durch 
+    \[ P(t) = e^{tQ} = \sum_{n=0}^\infty \frac{(tQ)^n}{n!}. \]
+\end{karte}
+
+\begin{karte}{Kolmogorovsches Vorwärtsdifferentialgleichungssystem}
+    Falls die Bedingungen für das Rückwartsdifferentialgleichungssystem 
+    erfüllt sind und zusätzlich \(\sum_{k\in S} p_{ik}(t) q_k < \infty \),
+    dann ist \( \set{P(t), t\geq 0} \) auch die Lösung des Kolmogorovschen
+    Vorwärtsdifferentialgleichungssystems
+    \[ P'(t) = P(t) Q. \]
+\end{karte}
+
+\begin{karte}{Interpretation der Intensitäten}
+    Für \(i\neq j\) gilt:
+    \[ \P(X_{t+h} = j \;|\; X_t = i) = p_{ij}(h) = q_{ij}h + o(h). \]
+
+    Für \(i=j\) gilt:
+    \[ \P(X_{t+h} = i \;|\; X_t = i) = p_{ii}(h) = 1 - q_i h + o(h). \]
+\end{karte}
+
+\begin{karte}{RCLL}
+    Die Pfade der Markov-Kette \((X_t)_{t\geq 0}\) liegen in 
+    \begin{align*}
+        D(S) := \set{ &\abb{f}{[0,\infty)}{S} \;|\; f(t+) = f(t) \forall t\geq 0 \\
+        &f(t-) \text{ existiert } \forall t > 0 }
+    \end{align*}
+    Die Eigenschaft von \(f \in D(S)\) wird auch mit RCLL (right-continuous, left-hand limits) 
+    oder càdlàg (continue à droite, limite à gauche) bezeichnet.
+\end{karte}
+
+\begin{karte}{(Q1)-(Q3)}
+    Sei Intensitätsmatrix \( Q = (q_{ij}) \) gegeben:
+    \begin{description}
+        \item[(Q1)] \(q_{ij} \geq 0\) für alle \(i,j\in S,i\neq j\) 
+        und \(q_{ii} \leq 0\) für alle \(i\in S\),
+        \item[(Q2)] \(\sum_{j\in S} q_{ij} = 0\) für alle \(i\in S\),
+        \item[(Q3)] \(0<\sup_{i\in S} \abs{q_{ii}} =: \lambda < \infty\). 
+    \end{description}
+    \(q_i = 0\) bedeutet, dass \(i\) absorbierend ist (\(\P(X_t = i \;|\;X_0 = i) = 1\)).
+
+    (Q3) garantiert, dass der Prozess nicht explodiert, d. h. eine
+    unendliche Anzahl von Sprüngen in endlicher Zeit hat.
+
+    (Q3) ist nur hinreichend.\\
+    Reuters Explosionskriterium: \((X_t)\) explodiert nicht 
+    \(\Leftrightarrow x = 0\) ist einzige nicht negative, 
+    beschränkte Lösung von \(Qx = x\).
+\end{karte}
+
+\begin{karte}{Konstruktion Markov-Kette durch Intensitätsmatrix}
+    Für eine Matrix \(Q\) gelte (Q1)-(Q3). Es sei \((N_t)_{t\geq 0}\) 
+    ein Poisson-Prozess mit Intensität \(\lambda := \sup_i q_i\) 
+    und \(Y = (Y_n)_{n\in\N_0}\) eine von \((N_t)\) unabhängige 
+    (zeitdiskrete) Markov-Kette mit Start in \(i_0 \in S\) und 
+    Übergangsmatrix \(\tilde{P} = (\tilde{p}_{ij})_{i,j\in S}\) 
+    mit \(\tilde{P} := E + \frac{1}{\lambda} Q\), also 
+    \[ \tilde{p}_{ij} = \delta_{ij} + \frac{q_{ij}}{\lambda}. \]
+    Dann ist \((X_t)_{t_\geq 0}\) mit \(X_t := Y_{N_t}\) eine 
+    Markov-Kette mit Start in \(i_0\), Pfaden in \(D(S)\) und 
+    Intensitätsmatrix \(Q\).
+\end{karte}
+
+\begin{karte}{Sprungzeiten}
+    Sei \((X_t)_{t\geq 0}\) eine Markov-Kette mit Zustandsraum \(S\).
+
+    Die Sprungzeiten seien 
+    \begin{align*}
+        S_0 &:= 0 \\
+        S_1 &:= \inf \set{t\geq 0 \;|\; X_t \neq X_0 } \\
+        S_n &:= \inf \set{t> S_{n-1} \;|\; X_t \neq X_{S_{n-1}}}.
+    \end{align*}
+    Die Verweildauern in den Zuständen bezeichnen wir mit 
+    \[ T_n := S_n - S_{n-1}. \]
+    Weiter Sei \(Y_n := X_{S_n}\) (eingebettete Markov-Kette).
+\end{karte}
+
+\begin{karte}{Eingebettete Markov-Kette}
+    Sei \((X_t)_{t\geq 0}\) eine Markov-Kette mit Zustandsraum \(S\) und 
+    Intensitätsmatrix \(Q\), wobei (Q1)-(Q3) erfüllt seien. Dann gilt 
+    \begin{enumerate}
+        \item \((Y_n)\) ist eine zeitdiskrete Markov-Kette mit Übergangsmatrix \(P = (p_{ij})\), 
+        wobei für \(q_i > 0\) 
+        \[ p_{ij} = \begin{cases}
+            \frac{q_{ij}}{q_i}, &i\neq j \\
+            0, &i=j
+        \end{cases} \]
+        und \(p_{ij} = \delta_{ij}\), falls \(q_i = 0\). \((Y_n)\) heißt 
+        eingebettete Markov-Kette.
+        \item Die Verweildauern \(T_1, \ldots \) sind bedingt unter 
+        \((Y_n)\) stochastisch unabhängig mit 
+        \[ T_n \sim \mathrm{Exp}(q_{Y_{n-1}}). \]
+    \end{enumerate}
+\end{karte}

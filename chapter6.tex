@@ -1,0 +1,46 @@
+\section{Poisson Prozess}
+
+\begin{karte}{Stochastischer Prozess}
+    Eine Familie von Zufallsvariablen \((X_t)_{t\in\R}\) auf 
+    \( (\Omega, \mathcal{F}, \P) \) mit \( \abb{X_t}{\Omega}{S} \) 
+    heißt \textit{stochastischer Prozess} (in stetiger Zeit) mit Zustandsraum \(S\).
+\end{karte}
+
+\begin{karte}{(A1) - (A4)}
+    Wir betrachten Zufallsvariablen \( \abb{N_t}{\Omega}{S := \N_0} \).
+    \((N_t)_{t\geq 0}\) soll bestimmte Ereignisse zählen. 
+    Es trete mindestens ein Ereignis ein und die Anzahl der 
+    Ereignisse in einem kompakten Intervall seien endlich.
+    \begin{description}
+        \item[(A1)] Alle Pfade \(t\mapsto N_t(\omega)\) liegen in 
+        \[ D_0 := \set{\abb{f}{[0,\infty)}{\N_0} \;|\; f(0) = 0, f \text{ stetig von rechts} }. \]
+        \item[(A2)] \( (N_t) \) hat unabhängige Zuwächse, d. h. für alle \(0\leq t_0 \leq t_1 \leq \cdots \leq t_n, n\in \N\)
+        sind die Zufallsvariablen 
+        \[ N_{t_0}, N_{t_1 - t_0}, \ldots, N_{t_n} - N_{t_{n-1}} \]
+        stochastisch unabhängig.
+        \item[(A3)] \((N_t)\) hat stationäre Zuwächse, d. h. für alle \(t>0\) 
+        hängt die Verteilung von \(N_{s+t} - N_s\) nicht von \(s\) ab.
+        \item[(A4)] Ereignisse treten einzeln auf, d. h. \( \P(N_h \geq 2) = o(h) \)
+        mit \(h\downarrow 0\).  
+    \end{description}
+\end{karte}
+
+\begin{karte}{Poisson-Prozess}
+    Sei \( (N_t)_{t\geq 0} \) ein stochastischer Prozess, der den Bedingungen 
+    (A1)-(A4) genügt. Dann hat \((N_t)\) mit Wahrscheinlichkeit \(1\) 
+    nur Sprünge der Höhe \(1\) und es existiert ein \(\lambda > 0\), sodass: 
+    \begin{enumerate}
+        \item Für alle \(s,t\geq 0\) ist \( N_{s+t} - N_s \) 
+        Poisson-verteilt mit Parameter \(\lambda t\).
+        \item Die Zeiten zwischen aufeinanderfolgenden Sprüngen 
+        des Prozesses sind unabhängig und exponentialverteilt mit Parameter \(\lambda\).
+    \end{enumerate}
+    \( (N_t) \) nennt man \textit{Poisson-Prozess} mit Parameter \(\lambda > 0\).
+\end{karte}
+
+\begin{karte}{Konstruktion Poisson-Prozess}
+    Es seien \( K,X_1, \ldots \) unabhängige Zufallsvariablen mit \(K\sim \mathrm{Po}(\lambda,T), T>0\)
+    und \(X_i \sim U(0,T)\) für alle \(i \in \N\). Wir definieren für \(t\geq 0\): 
+    \[ N_t := \# \set{1\leq i \leq K : X_i \leq t}. \]
+    Dann ist \((N_t)\) ein Poisson-Prozess.
+\end{karte}
