@@ -1,0 +1,51 @@
+\section{Reversibilität}
+
+\begin{karte}{Annahmen}
+    Sei \((X_t)\) eine zeitstetige Markov-Kette,
+    \begin{itemize}
+        \item deren Intensitätsmatrix (Q1)-(Q3) erfüllt ist,
+        \item die irreduzibel und pos. rekurrent mit stationärer 
+        Verteilung \(\pi\) ist,
+        \item wobei die Kette im Gleichgewicht, 
+        d. h. \(\P(X_t = i) = \pi_i\) ist.
+    \end{itemize} 
+    Außerdem betrachten wir die ganze reelle Zeitachse.
+\end{karte}
+
+\begin{karte}{Stationär}
+    Ein stochastischer Prozess 
+    \((X_t)_{t\in \R}\) heißt \textit{stationär}, 
+    falls 
+    \[ (X_{t_1}, \ldots, X_{t_n}) \overset{d}{=}
+    (X_{t_1+\Delta}, \ldots, X_{t_n + \Delta}) \]
+    für alle \(-\infty < t_1 < \cdots < t_n < \infty, 
+    \Delta \in \R, n\in\N\).
+\end{karte}
+
+\begin{karte}{Reversibilität Kriterium}
+
+    Die Markov-Kette 
+    \((X_t)\) ist reversibel \(\Leftrightarrow\) 
+    die stationäre Verteilung erfüllt die 
+    detailed balance equations, d. h. 
+    \[ \pi_j q_{jk} = \pi_k q_{kj}. \]
+\end{karte}
+
+\begin{karte}{Gleichung mit \(A\subset S\)}
+    Dann folgt für alle \(A\subset S\):
+    \[ \sum_{j\in A} \sum_{k\in S\setminus A} 
+    \pi_j q_{jk} = 
+    \sum_{j\in A} \sum_{k\in S\setminus A} 
+    \pi_k q_{kj}. \]
+\end{karte}
+
+\begin{karte}{Markov-Kette als Graph}
+    Einer Markov-Kette 
+    \((X_t) \) mit Zustandsraum \(S\) und 
+    Intensitätsmatrix \(Q\) kann man einem Graphen zuordnen: 
+    Ecken sind Zustände, Kante zwischen \(j\) und \(k\)
+    (\(k\neq j\)) wenn \(q_{jk} > 0\) oder \(q_{kj} > 0\).
+
+    Ist der assoziierte Graph ein Baum (zyklenfrei, 
+    zusammenhängend), so ist die Markov-Kette reversibel.
+\end{karte}

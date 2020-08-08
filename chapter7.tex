@@ -155,3 +155,80 @@
         \[ T_n \sim \mathrm{Exp}(q_{Y_{n-1}}). \]
     \end{enumerate}
 \end{karte}
+
+\begin{karte}{Invariantes Maß, stationäre Verteilung}
+    Sei \((X_t)_{t\geq 0}\) eine Markov-Kette mit SÜMF \(\set{P(t),t\geq 0}\).
+    Ein Maß \( \abb{\mu}{S}{\R_+} \) heißt \textit{invariantes Maß}, falls für alle 
+    \(t\geq 0\) gilt:
+    \( \mu = \mu P(t) \), also für jedes \(j\in S\) gilt: 
+    \[ \mu(j) = \sum_{i\in S} \mu(i) p_{ij}(t). \]
+    Ist zusätzlich \( \sum_{j\in S} \mu(j) = 1 \), so heißt \(\mu\) 
+    \textit{stationäre Verteilung}.
+\end{karte}
+
+\begin{karte}{Kriterium invariantes Maß}
+    Sei \((X_t)_{t\geq 0}\) eine Markov-Kette 
+    mit Intensitätsmatrix \(Q\), wobei (Q1)-(Q3) 
+    erfüllt seien. Dann ist \(\mu\) ein invariantes Maß 
+    \( \Leftrightarrow \) 
+    \[ \mu Q = 0. \]
+\end{karte}
+
+\begin{karte}{Rekurrent, positiv rekurrent, irreduzibel}
+    Sei \((X_t)_{t\geq 0}\) eine Markov-Kette mit 
+    Zustandsraum \(S,q_i<\infty \forall i\).
+    Sei \( V_i := \inf\set{t>0:X_t \neq i} \),
+    \(\tilde{T}_i := \inf\set{t>V_i:X_t = i}\).
+    \(\tilde{T}_i\) ist also der erste Rückkehrzeitpunkt nach \(i\), 
+    wenn \(X_0 = i\) ist.
+    \begin{enumerate}
+        \item \(i\) heißt \textit{rekurrent}, falls \(i\) rekurrent
+        für die eingebettete Kette \((Y_n)\) ist.
+        \item \(i\) heißt \textit{positiv rekurrent}, 
+        falls \(i\) rekurrent ist und 
+        \[ m_i := \E[\tilde{T}_i] < \infty. \]
+        \item Die Markov-Kette heißt \textit{irreduzibel}, 
+        falls \((Y_n)\) irreduzibel ist.
+    \end{enumerate}
+\end{karte}
+
+\begin{karte}{Invariante Maße über eingebettete Kette}
+    Sei \((X_t)\) eine irreduzible Markov-Kette 
+    mit Intensitätsmatrix \(Q\), wobei (Q1)-(Q3) gelten.
+    Dann gilt: \\
+    Ist \(\nu\) ein invariantes Maß für \((Y_n)\), so ist 
+    \(\mu = (\frac{\nu_i}{q_i})_{i\in S}\) ein invariantes 
+    Maß für \((X_t)\).\\
+    Ist \(\mu\) ein invariantes Maß für \((X_t)\), so ist 
+    \(\nu = (\mu_i q_i)_{i\in S}\) ein invariantes 
+    Maß für \((Y_n)\).
+
+    Es gilt \(\mu_i q_i = c\E_k \left[\sum_{n=1}^{T_k} 1_{[Y_n = i]}\right]\).
+
+    Die stationäre Verteilung gibt auch hier die durchschnittliche 
+    Zeit an, die die Markov-Kette in den einzelnen Zuständen verbringt.
+\end{karte}
+
+\begin{karte}{Statuionäre Verteilung \(\Leftrightarrow\) positiv rekurrent}
+    Sei \((X_t)\) eine Markov-Kette mit Intensitätsmatrix 
+    \(Q\), wobei (Q1)-(Q3) erfüllt seien. Sind alle 
+    Zustände rekurrent und ist die Markov-Kette irreduzibel, so gilt 
+    \begin{enumerate}
+        \item \( \limes{t} p_{ij}(t) = \frac{1}{m_j q_j} \) für alle \(i,j\in S\), 
+        unabhängig von \(i\in S\).
+        \item \((X_t)\) besitzt eine stationäre Verteilung \(\pi = (\pi_i) 
+        \Leftrightarrow \) es gibt einen positiv rekurrenten Zustand \(j\).\\
+        In diesem Fall ist \(\pi_j = \frac{1}{m_j q_j} > 0 \forall j\in S\) 
+        und alle Zustände sind positiv rekurrent.
+    \end{enumerate}
+\end{karte}
+
+\begin{karte}{Ersterreichungszeiten}
+    Sei \((X_t)\) eine irreduzible Markov-Kette 
+    mit endlichem Zustandsraum. \(j\in S\) fest 
+    und \(\hat{T}_j := \inf \set{t\geq 0:X_t = j}\).
+    Für \(i\neq j\) sei \(t_i := \E[\hat{T}_j]\).
+    \(Q^j := (q_{ik})_{i\neq j,k\neq j}, e = (1,\ldots, 1)\). \\
+    Unter diesen Bedingungen ist \(t = (t_i)\) Lösung von 
+    \(e=-Q^j t\).
+\end{karte}

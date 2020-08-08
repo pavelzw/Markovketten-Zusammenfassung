@@ -1,0 +1,142 @@
+\section{Warteschlangen}
+
+\begin{karte}{Kendall-Notation}
+    \(A/B/c\) bezeichnet \(A\) den Ankunftsprozess, 
+    \(B\) den Abfertigungsprozess und \(c\) ist die Anzahl 
+    der Bediener.\\
+    \(M\) steht für Markovsch. 
+\end{karte}
+
+\subsection*{\(M/M/1\)-Modell}
+
+\begin{karte}{\(M/M/1\) Eigenschaften}
+    Bei \(M/M/1\) ist \((X_t)\) ist ein Geburts- und Todesprozess 
+    mit Parametern \(\lambda = \lambda_i, \mu = \mu_i\).
+    
+    Das \(M/M/1\)-Modell ist positiv rekurrent 
+    genau dann, wenn \(\rho := \frac{\lambda}{\mu} < 1\).
+    In diesem Fall ist die stationäre Verteilung geometrisch 
+    mit Parameter \(\rho\), d. h. 
+    \[ \pi_i = (1-\rho) \rho^i. \]
+    (Q1)-(Q3) sind erfüllt.
+\end{karte}
+
+\subsection*{\(M/M/\infty\)-Modell}
+
+\begin{karte}{\(M/M/\infty\) Eigenschaften}
+    \((X_t)\) ist ein Geburts- und Todesprozess 
+    mit Parametern \(\lambda_i = \lambda, 
+    \mu_i = i \mu\).
+    Sei \(\eta := \frac{\lambda}{\mu}\).
+    (Q3) ist nicht erfüllt, aber es findet trotzdem keine 
+    Explosion statt.
+
+    Das \(M/M/\infty\)-Modell ist positiv rekurrent. 
+    Die stationäre Verteilung ist eine Poisson-Verteilung 
+    mit Parameter \(\eta\), d. h. 
+    \[ \pi_i = e^{-\eta} \frac{\eta^i}{i!}. \]
+\end{karte}
+
+\subsection*{Erlangsche Verlustsystem}
+
+\begin{karte}{Erlangsches Verlustsystem}
+    Telefonzentrale mit \(K\) Leitungen. 
+    Anrufe kommen gemäß eines Poisson-Prozesses mit 
+    Parameter \(\lambda > 0\) an. Rufdauer sei u. i. exponentialverteilt 
+    mit Parameter \(\mu > 0\).
+
+    Sind alle leitungen besetzt, so geht ein Anruf verloren.
+    Wie groß ist im Gleichgewicht der Bruchteil verloren 
+    gegangener Anrufe?
+\end{karte}
+
+\begin{karte}{Erlangsches Verlustsystem Intensitätsmatrix}
+    \((X_t)\) seien die Anzahl der besetzten Leitungen 
+    zur Zeit \(t\).
+    \[ Q = \begin{pmatrix}
+        -\lambda & \lambda & & & \\
+        \mu & -(\lambda + \mu) & \lambda & & \\
+        & & \ddots & & \\
+        & & (K-1)\mu &-((K-1)\mu + \lambda) & \lambda \\
+        & & & K\mu & -K\mu
+    \end{pmatrix} \]
+\end{karte}
+
+\begin{karte}{Erlangsche Verlustformel}
+    Es handelt sich um einen Geburts- und Todesprozess 
+    mit 
+    \[ \lambda_i = \begin{cases}
+        \lambda, &i<K \\
+        0, & i\geq K
+    \end{cases} \]
+    \[ \mu_i = \begin{cases}
+        \mu \cdot i, &i \leq K \\
+        0, &i > K
+    \end{cases} \]
+    Der Prozess ist positiv rekurrent.
+    Es gilt 
+    \[ \pi_i = \frac{\eta^i}{i!} \left( 
+        \sum_{n=0}^K \frac{\eta^n}{n!} 
+    \right)^{-1}. \]
+    Dies ist die sogenannte Erlangsche Verlustformel.
+\end{karte}
+
+\subsection*{Jackson-Netzwerk}
+
+\begin{karte}{Annahmen}
+    \begin{itemize}
+        \item \(N\) gekoppelte Warteschlangen/Stationen.
+        \item Station \(j\) hat einen Bediener, erhält unabh. 
+        von den anderen Ankünfte über Poisson-Prozess mit Parameter 
+        \(\alpha_j > 0\).
+        \item Bedienzeiten an Station \(j \) 
+        sind u. i. exponentialverteilt mit Parameter 
+        \(\mu_j > 0\).
+        \item Wird ein Job an Station \(i\) abgefertigt, 
+        wechselt er mit Wahrscheinlichkeit \(p_{ij}\) an Station \(j\).
+        \item Mit Wahrscheinlichkeit \(p_{i0} := 1 - \sum_{j\neq 0} p_{ij}\) 
+        verlässt er das System.
+        \item \(P = (p_{ij})\) enthält Wechsel- oder Routingwahrscheinlichkeiten.
+        \item Es existiere \((E-P)^{-1}\), (z. B. wenn \(p_{i0}>0\forall i>0\)).
+    \end{itemize}
+\end{karte}
+
+\begin{karte}{Ankunftsrate}
+    Verkehrsgleichungen 
+    \[ \lambda_k = \alpha_k + \sum_{i=1}^N \lambda_i p_{ik} \]
+    oder \(\lambda = \alpha + \lambda P\). Es existiert eine 
+    eindeutige Lösung \(\lambda = \alpha (E-P)^{-1}\).
+
+    \(\lambda_k\) ist die nominale, totale Ankunftsrate an 
+    Station \(k\).
+\end{karte}
+
+\begin{karte}{Bezeichnungen}
+    Sei \(X_t = (X_1(t), \ldots,X_N(t))\) wobei 
+    \(X_j(t)\) die Anzahl der wartenden Jobs an Station \(j\) 
+    zur Zeit \(t\) ist.
+    \((X_t)\) ist eine zeitstetige Markov-Kette mit 
+    \(S=\N_0^N\). Für \(i,j\in S, i\neq j\) gilt (\(\delta(x) = 0\) für \(x=0\), \(1\) sonst):
+    \[ q_{ij} = \begin{cases}
+        \alpha_k, & j = i + e_k \\
+        \mu_k p_{kl} \delta(i_k), j = i - e_k + e_l, k\neq l \\
+        \mu_k p_{k0} \delta(i_k), j=i-e_k.
+    \end{cases} \]
+    \( q_{ii} := - \sum_{j\neq i} q_{ij} \).
+\end{karte}
+
+\begin{karte}{Stationäre Verteilung, global balance equations}
+    \((X_t)\) ist irreduzibel. \\
+    \(\pi Q = 0 \Leftrightarrow\) global balance equations 
+    \[ \sum_{i\neq j} \pi(i) q_{ij} = \pi(j) \sum_{i\neq j} q_{ji}. \]
+
+    Es existiert genau dann eine stationäre Verteilung, 
+    wenn \(\rho_k = \frac{\lambda_k}{\mu_k} < 1\).
+    In diesem Fall gilt:
+    \[ \pi(j_1, \ldots, j_N) = \prod_{k=1}^N (1-\rho_k) \rho_k^{j_k}. \]
+
+    Die Stationen verhalten sich im 
+    Gleichgewicht statistisch unabhängig:
+    \[ \P(X_1(t) = j_1,\ldots, X_N(t) = j_N) = 
+    \prod_{k=1}^N \P(X_k(t)=j_k). \]
+\end{karte}
